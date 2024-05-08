@@ -1,0 +1,74 @@
+[
+  {
+    "last_id": 16
+  },
+  {
+    "id": 3,
+    "type": "dog",
+    "nick": "Guff",
+    "birthd": "2023-01-02",
+    "commands": [
+      "\u0441\u0438\u0434\u0435\u0442\u044c",
+      "\u043b\u0435\u0436\u0430\u0442\u044c"
+    ]
+  },
+  {
+    "id": 7,
+    "type": "cat",
+    "nick": "Maya",
+    "birthd": "2022-01-01",
+    "commands": [
+      "\u0436\u0434\u0438",
+      "\u043a\u0443\u0448\u0430\u0442\u044c"
+    ]
+  },
+  {
+    "id": 8,
+    "type": "dog",
+    "nick": "Kerry",
+    "birthd": "2020-12-12",
+    "commands": "run"
+  },
+  {
+    "id": 10,
+    "type": "cat",
+    "nick": "Lorry",
+    "birthd": "2010-01-01",
+    "commands": "sleep"
+  },
+  {
+    "id": 11,
+    "type": "Hamster",
+    "nick": "Danny",
+    "birthd": "2023-03-02",
+    "commands": "eat"
+  },
+  {
+    "id": 12,
+    "type": "dog",
+    "nick": "Dyke",
+    "birthd": "2010-09-08",
+    "commands": "run"
+  },
+  {
+    "id": 13,
+    "type": "cat",
+    "nick": "Fuffy",
+    "birthd": "2022-10-01",
+    "commands": "peace_off"
+  },
+  {
+    "id": 14,
+    "type": "Hamster",
+    "nick": "Oleg",
+    "birthd": "2024-03-04",
+    "commands": "fight"
+  },
+  {
+    "id": 15,
+    "type": "dog",
+    "nick": "Aizek",
+    "birthd": "2010-02-03",
+    "commands": "think"
+  }
+]
