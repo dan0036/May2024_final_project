@@ -8,4 +8,4 @@ class Cat(animal):
         self.type: str = 'cat'
         self.nick: str = nick
         self.birthd: date = birthd
-        self.commands: set = commands
+        self.commands: str = commands

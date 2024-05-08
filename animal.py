@@ -6,7 +6,7 @@ class Animal(ABC):
     type: str
     nick: str
     birthd: date
-    commands: set
+    commands: str
 
     def __init__(self, id, type, nick, birthd, commands):
         self.id: int = id
@@ -14,3 +14,5 @@ class Animal(ABC):
         self.nick: str = nick
         self.birthd: date = birthd
         self.commands: set = commands
+
+

@@ -1,9 +1,45 @@
 import json
-
+import datetime
 import animal
 import controller
 import text
+import mysql.connector
+from mysql.connector import Error
 
+
+def create_connection(host_name, user_name, user_password, db_name):
+    connection = None
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            user=user_name,
+            passwd=user_password,
+            database=db_name
+        )
+        print("Connection to MySQL DB successful")
+    except Error as e:
+        print(f"The error '{e}' occurred")
+    return connection
+
+
+def execute_query(connection, query):
+    cursor = connection.cursor()
+    try:
+        cursor.execute(query)
+        connection.commit()
+        print("Query executed successfully")
+    except Error as e:
+        print(f"The error '{e}' occurred")
+
+def execute_read_query(connection, query):
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Error as e:
+        print(f"The error '{e}' occurred")
 
 def load_db(filename='db.json'):
     try:
@@ -27,7 +63,7 @@ def save_db(db, filename='db.json'):
         json.dump(db, file, indent=2)
 
 
-def init_id_animal_db(e: int):
+def init_by_id_animal_db(e: int):
     try:
         for i in controller.db:
             if i.get('id') == e:
@@ -43,7 +79,7 @@ def init_id_animal_db(e: int):
 
 
 
-def init_nick_animal_db(nick: str):
+def init_by_nick_animal_db(nick: str):
     for dict_animal in controller.db:
         if dict_animal.get('nick') == nick:
             return animal.Animal(dict_animal['id'],
@@ -54,12 +90,14 @@ def init_nick_animal_db(nick: str):
 
 
 def add_animal(an: animal):
-    animal_db = {'id': an.id,
+    animal_db = {'id': controller.last_id,
                  'type': an.type,
                  'nick': an.nick,
                  'birthd': an.birthd,
                  'commands': an.commands}
     controller.db.append(animal_db)
+    controller.last_id += 1
+    controller.db[0]['last_id'] = controller.last_id
     save_db(controller.db)
     print('Animal save successful.')
 
@@ -79,7 +117,8 @@ def add_animal(type, nick, birthd, commands):
 
 
 def show_db():
-    sorted_db = sorted(controller.db, key=lambda x: x.get('birthd'))
+    sorted_db = sorted(controller.db,
+        key=lambda x: datetime.datetime.strftime(x.get('birthd')))
     print('*** db start ***')
     for an in sorted_db:
         print_animal_from_dict(an)
@@ -106,9 +145,9 @@ def print_animal_from_class(a):
 def detect_int_str_animal_search(income): # returnes class Animal object
     try:
         int(income)
-        return init_id_animal_db(income)
+        return init_by_id_animal_db(income)
     except:
-        return init_nick_animal_db(income)
+        return init_by_nick_animal_db(income)
 
     # found_db = list()
     # for animal in db:

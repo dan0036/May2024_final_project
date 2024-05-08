@@ -8,4 +8,4 @@ class Dog(animal):
         self.type: str = 'dog'
         self.nick: str = nick
         self.birthd: date = birthd
-        self.commands: set = commands
+        self.commands: str = commands
