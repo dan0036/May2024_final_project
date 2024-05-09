@@ -100,7 +100,11 @@ def start():
                     model.execute_query(connection, db_queries.delete_animal(type[0][0], find))
                 except:
                     print(text.search_animal_error(find))
-                # id_edit = int(input(text.input_delete_id))
-                # model.delete_animal(id_edit, db)
             case '6':
+                try:
+                    find = input(text.input_search_nick).upper()
+                    print(model.execute_read_query(connection, db_queries.find_animal_commands(find))[0][0])
+                except:
+                    print(text.search_animal_error(find))
+            case '7':
                 break

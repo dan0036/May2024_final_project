@@ -84,6 +84,16 @@ def find_animal(find):
     SELECT * FROM hamsters
     WHERE nick ='{find}'; """
 
+def find_animal_commands(find):
+    return f"""
+    SELECT commands FROM dogs
+    WHERE nick ='{find}'
+    UNION
+    SELECT commands FROM cats
+    WHERE nick ='{find}'
+    UNION
+    SELECT commands FROM hamsters
+    WHERE nick ='{find}'; """
 
 def find_type_by_nick(find):
     return f"""
