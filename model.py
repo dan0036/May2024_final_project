@@ -23,13 +23,14 @@ def create_connection(host_name, user_name, user_password, db_name):
 
 
 def execute_query(connection, query):
-    cursor = connection.cursor()
     try:
+        cursor = connection.cursor()
         cursor.execute(query)
         connection.commit()
-        print("Query executed successfully")
+        # print("Query executed successfully")
     except Error as e:
-        print(f"The error '{e}' occurred")
+        raise e
+
 
 def execute_read_query(connection, query):
     cursor = connection.cursor()
@@ -40,6 +41,14 @@ def execute_read_query(connection, query):
         return result
     except Error as e:
         print(f"The error '{e}' occurred")
+
+
+def check_type_animal(type):
+    if type in "dog cat hamster":
+        return True
+    else:
+        return False
+
 
 def load_db(filename='db.json'):
     try:
@@ -75,18 +84,17 @@ def init_by_id_animal_db(e: int):
                     i['commands'])
         raise Exception('Err. No such id!')
     except Exception as err:
-        pass # print(err)
-
+        pass  # print(err)
 
 
 def init_by_nick_animal_db(nick: str):
     for dict_animal in controller.db:
         if dict_animal.get('nick') == nick:
             return animal.Animal(dict_animal['id'],
-                          dict_animal['type'],
-                          dict_animal['nick'],
-                          dict_animal['birthd'],
-                          dict_animal['commands'])
+                                 dict_animal['type'],
+                                 dict_animal['nick'],
+                                 dict_animal['birthd'],
+                                 dict_animal['commands'])
 
 
 def add_animal(an: animal):
@@ -101,8 +109,8 @@ def add_animal(an: animal):
     save_db(controller.db)
     print('Animal save successful.')
 
-def add_animal(type, nick, birthd, commands):
 
+def add_animal(type, nick, birthd, commands):
     animal_db = {'id': controller.last_id,
                  'type': type,
                  'nick': nick,
@@ -115,14 +123,14 @@ def add_animal(type, nick, birthd, commands):
     print('Animal save successful.')
 
 
-
 def show_db():
     sorted_db = sorted(controller.db,
-        key=lambda x: datetime.datetime.strftime(x.get('birthd')))
+                       key=lambda x: datetime.datetime.strftime(x.get('birthd')))
     print('*** db start ***')
     for an in sorted_db:
         print_animal_from_dict(an)
     print('*** db end ***')
+
 
 def print_animal_from_dict(an):
     print(f"id: {an.get('id')}\n"
@@ -131,18 +139,19 @@ def print_animal_from_dict(an):
           f"birthd: {an.get('birthd')}\n"
           f"commands: {an.get('commands')}")
 
+
 def print_animal_from_class(a):
     try:
         print(f"id: {a.id}\n"
-          f"type: {a.type}\n"
-          f"nick: {a.nick}\n"
-          f"birthd: {a.birthd}\n"
-          f"commands: {a.commands}")
+              f"type: {a.type}\n"
+              f"nick: {a.nick}\n"
+              f"birthd: {a.birthd}\n"
+              f"commands: {a.commands}")
     except:
         print(text.search_result_none)
 
 
-def detect_int_str_animal_search(income): # returnes class Animal object
+def detect_int_str_animal_search(income):  # returnes class Animal object
     try:
         int(income)
         return init_by_id_animal_db(income)
@@ -164,7 +173,7 @@ def detect_int_str_animal_search(income): # returnes class Animal object
 def edit_animal(animal_id, title, message, db: list):
     for animal in db:
         if animal.get('id') == animal_id:
-            print('**'+title+'**')
+            print('**' + title + '**')
             if title != '':
                 animal.update({'title': title})
             if message != '':
