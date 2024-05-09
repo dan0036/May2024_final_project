@@ -61,6 +61,11 @@ select_all_animals_by_birthd = """
     ORDER BY birthd;
 """
 
+count_animals = lambda x: \
+    f"""
+    SELECT COUNT(*) FROM {x}s;
+    """
+
 
 def insert_animal(type, nick, birthd, commands):
     if model.check_type_animal(type):
@@ -84,6 +89,7 @@ def find_animal(find):
     SELECT * FROM hamsters
     WHERE nick ='{find}'; """
 
+
 def find_animal_commands(find):
     return f"""
     SELECT commands FROM dogs
@@ -94,6 +100,7 @@ def find_animal_commands(find):
     UNION
     SELECT commands FROM hamsters
     WHERE nick ='{find}'; """
+
 
 def find_type_by_nick(find):
     return f"""

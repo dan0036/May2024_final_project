@@ -107,4 +107,10 @@ def start():
                 except:
                     print(text.search_animal_error(find))
             case '7':
+                try:
+                    type = input(text.input_search_type).lower()
+                    print(model.execute_read_query(connection, db_queries.count_animals(type))[0][0])
+                except:
+                    print(text.search_animal_error(find))
+            case '8':
                 break
