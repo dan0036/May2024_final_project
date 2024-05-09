@@ -9,20 +9,21 @@ last_id: int
 
 
 def start():
-    connection = \
-        (model.create_connection(
-            "Localhost",
-            "root",
-            "Russia2024",
-            "dan_1"
-        ))
     # connection = \
     #     (model.create_connection(
-    #         "bkdarmqasjriytsv8kxg-mysql.services.clever-cloud.com",
-    #         "uzatpacf58x8totx",
-    #         "tqMtmmKocQlYXfzOyXmu",
-    #         "bkdarmqasjriytsv8kxg"
+    #         "Localhost",
+    #         "root",
+    #         "Russia2024",
+    #         "dan_1"
     #     ))
+
+    connection = \
+        (model.create_connection(
+            "bkdarmqasjriytsv8kxg-mysql.services.clever-cloud.com",
+            "uzatpacf58x8totx",
+            "tqMtmmKocQlYXfzOyXmu",
+            "bkdarmqasjriytsv8kxg"
+        ))
 
     model.execute_query(connection, db_queries.create_table_animals)
 
